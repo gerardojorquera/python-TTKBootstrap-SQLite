@@ -1,12 +1,23 @@
 import ttkbootstrap as ttk
 import sqlite3
 from ttkbootstrap.dialogs import Messagebox
+import ctypes
+
+# 1. TRUCO PARA LA BARRA DE TAREAS (Agregar aquí)
+try:
+    myappid = 'hojalata.app.sqlite.v1'
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+except Exception:
+    pass
 
 class MiAplicacion(ttk.Window):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)      
         self.title("Mi App con SQLite")
         self.geometry("1800x1000")
+
+        # Agregar un icono a la app
+        self.iconbitmap("Hojalata.ico")
         
         # Inicializa la base de datos y la interfaz
         self.setup_database()
